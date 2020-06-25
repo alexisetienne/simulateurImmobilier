@@ -15,6 +15,11 @@ import messages from './messages';
 
 const themeLabel = createMuiTheme({
   overrides: {
+    MuiMobileStepper: {
+      dotActive: {
+        backgroundColor: '#e65e21',
+      },
+    },
     MuiFormLabel: {
       root: {
         fontFamily: 'Cairo, sans-serif',
@@ -36,6 +41,17 @@ const styles = theme => ({
     justifyContent: 'center',
     [theme.breakpoints.down('md')]: {
       marginBottom: 12,
+    },
+  },
+  stepperContainer: {
+    width: 450,
+  },
+  buttonNext: {
+    color: '#e65e21',
+    borderColor: '#e65e21',
+    '&:hover': {
+      backgroundColor: '#e65e21',
+      color: '#ffffff',
     },
   },
   title: {
@@ -385,20 +401,17 @@ class InputValidator extends React.PureComponent {
                 {this.renderValidator()}
               </div>
               <MobileStepper
+                className={classes.stepperContainer}
                 steps={maxSteps}
                 position="static"
                 variant="dots"
                 activeStep={index}
                 nextButton={
                   <Button
-                    style={{
-                      backgroundColor: '#e65e21',
-                      color: '#ffffff',
-                      width: 150,
-                      height: 55,
-                    }}
+                    className={classes.buttonNext}
                     type="submit"
-                    size="small"
+                    variant="outlined"
+                    size="large"
                     disabled={index === this.maxSteps - 1}
                   >
                     <FormattedMessage {...messages.button[index].buttonNext} />
@@ -406,13 +419,8 @@ class InputValidator extends React.PureComponent {
                 }
                 backButton={
                   <Button
-                    style={{
-                      backgroundColor: '#e65e21',
-                      color: '#ffffff',
-                      width: 150,
-                      height: 55,
-                    }}
-                    size="small"
+                    variant="outlined"
+                    size="large"
                     onClick={buttonBack}
                     disabled={index === 0}
                   >
