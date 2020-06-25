@@ -6,28 +6,26 @@
  */
 
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
 import InputValidator from '../../components/Validator';
-import messages from './messages';
 
 class HomePage extends React.PureComponent {
   state = {
     index: 0,
     register: {
-      netSalary: 0,
-      annualBonus: 0,
-      otherSalary: 0,
-      receivedRent: 0,
-      contribution: 0,
-      rent: 0,
-      consumerCredit: 0,
-      otherCredit: 0,
+      netSalary: '',
+      annualBonus: '',
+      otherSalary: '',
+      receivedRent: '',
+      contribution: '',
+      rent: '',
+      consumerCredit: '',
+      otherCredit: '',
     },
   };
 
   handleChange = name => event => {
     const registerState = this.state.register;
-    registerState[name] = event.target.value;
+    registerState[name] = Number(event.target.value);
     const registerModified = Object.assign({}, registerState);
     this.setState({ register: registerModified });
   };
@@ -71,7 +69,6 @@ class HomePage extends React.PureComponent {
     const { index, register } = this.state;
     return (
       <div>
-        <FormattedMessage {...messages.header} />
         <InputValidator
           index={index}
           buttonBack={this.buttonBack}

@@ -2,20 +2,77 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import MobileStepper from '@material-ui/core/MobileStepper';
+import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import {
+  createMuiTheme,
+  MuiThemeProvider,
+  withStyles,
+} from '@material-ui/core/styles';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 
+const themeLabel = createMuiTheme({
+  overrides: {
+    MuiFormLabel: {
+      root: {
+        fontFamily: 'Cairo, sans-serif',
+        fontWeight: 'bold',
+        fontSize: '14px',
+        color: '#e65e21',
+        '&$focused': {
+          // increase the specificity for the pseudo class
+          color: '#e65e21',
+        },
+      },
+    },
+  },
+});
+
 const styles = theme => ({
   container: {
-    maxWidth: 800,
     display: 'flex',
-    flexDirection: 'column',
     justifyContent: 'center',
     [theme.breakpoints.down('md')]: {
       marginBottom: 12,
     },
+  },
+  cssLabel: {
+    color: '#e65e21',
+    fontFamily: 'Roboto, sans-serif',
+    fontWeight: 'bold',
+  },
+  paper: {
+    backgroundColor: '#ffffff',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 50,
+    padding: 50,
+    width: 600,
+  },
+  validatorContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  cssOutlinedInput: {
+    '&$cssFocused $notchedOutline': {
+      borderColor: `#e65e21 !important`,
+      color: `#e65e21 !important`,
+    },
+  },
+  cssFocused: {
+    color: '#e65e21',
+    '&:hover:not($inputDisabled):not(inputFocused):not($inputError) $inputNotchedOutline': {
+      borderColor: '#e65e21 !important',
+    },
+  },
+
+  notchedOutline: {
+    borderWidth: '1px',
+    borderColor: '#e65e21 !important',
+    color: '#e65e21',
   },
 });
 
@@ -25,7 +82,7 @@ class InputValidator extends React.PureComponent {
   };
 
   renderValidator() {
-    const { register, handleChange, index } = this.props;
+    const { register, handleChange, index, classes } = this.props;
     switch (index) {
       case 0:
         return [
@@ -33,6 +90,8 @@ class InputValidator extends React.PureComponent {
             ref={input => {
               this.netSalary = input;
             }}
+            variant="outlined"
+            margin="normal"
             key="salary-net"
             label="Salaire net"
             onChange={handleChange('netSalary', this.netSalary)}
@@ -45,12 +104,28 @@ class InputValidator extends React.PureComponent {
               'number is too low',
               'number is too high',
             ]}
+            InputLabelProps={{
+              classes: {
+                root: classes.cssLabel,
+                focused: classes.cssFocused,
+              },
+            }}
+            InputProps={{
+              classes: {
+                root: classes.cssOutlinedInput,
+                focused: classes.cssFocused,
+                notchedOutline: classes.notchedOutline,
+              },
+              inputMode: 'numeric',
+            }}
           />,
           <TextValidator
             ref={input => {
               this.annualBonus = input;
             }}
             key="annual-bonus"
+            variant="outlined"
+            margin="normal"
             label="Primes annuelles"
             onChange={handleChange('annualBonus', this.annualBonus)}
             name="Primes annuelles"
@@ -62,13 +137,29 @@ class InputValidator extends React.PureComponent {
               'number is too low',
               'number is too high',
             ]}
+            InputLabelProps={{
+              classes: {
+                root: classes.cssLabel,
+                focused: classes.cssFocused,
+              },
+            }}
+            InputProps={{
+              classes: {
+                root: classes.cssOutlinedInput,
+                focused: classes.cssFocused,
+                notchedOutline: classes.notchedOutline,
+              },
+              inputMode: 'numeric',
+            }}
           />,
           <TextValidator
             ref={input => {
               this.otherSalary = input;
             }}
             key="other-resource"
+            variant="outlined"
             label="Autres revenus"
+            margin="normal"
             onChange={handleChange('otherSalary', this.otherSalary)}
             name="autres revenus"
             value={register.otherSalary}
@@ -79,12 +170,28 @@ class InputValidator extends React.PureComponent {
               'number is too low',
               'number is too high',
             ]}
+            InputLabelProps={{
+              classes: {
+                root: classes.cssLabel,
+                focused: classes.cssFocused,
+              },
+            }}
+            InputProps={{
+              classes: {
+                root: classes.cssOutlinedInput,
+                focused: classes.cssFocused,
+                notchedOutline: classes.notchedOutline,
+              },
+              inputMode: 'numeric',
+            }}
           />,
           <TextValidator
             ref={input => {
               this.receiveRent = input;
             }}
             key="received-rent"
+            variant="outlined"
+            margin="normal"
             label="Loyers percus"
             onChange={handleChange('receivedRent', this.receiveRent)}
             name="loyers percus"
@@ -96,12 +203,28 @@ class InputValidator extends React.PureComponent {
               'number is too low',
               'number is too high',
             ]}
+            InputLabelProps={{
+              classes: {
+                root: classes.cssLabel,
+                focused: classes.cssFocused,
+              },
+            }}
+            InputProps={{
+              classes: {
+                root: classes.cssOutlinedInput,
+                focused: classes.cssFocused,
+                notchedOutline: classes.notchedOutline,
+              },
+              inputMode: 'numeric',
+            }}
           />,
           <TextValidator
             ref={input => {
               this.contribution = input;
             }}
             key="contribution"
+            variant="outlined"
+            margin="normal"
             label="Apport"
             onChange={handleChange('contribution', this.contribution)}
             name="apport"
@@ -113,6 +236,20 @@ class InputValidator extends React.PureComponent {
               'number is too low',
               'number is too high',
             ]}
+            InputLabelProps={{
+              classes: {
+                root: classes.cssLabel,
+                focused: classes.cssFocused,
+              },
+            }}
+            InputProps={{
+              classes: {
+                root: classes.cssOutlinedInput,
+                focused: classes.cssFocused,
+                notchedOutline: classes.notchedOutline,
+              },
+              inputMode: 'numeric',
+            }}
           />,
         ];
       case 1:
@@ -123,6 +260,8 @@ class InputValidator extends React.PureComponent {
             }}
             key="add-rent"
             label="Loyer mensuel restant"
+            margin="normal"
+            variant="outlined"
             onChange={handleChange('rent', this.rent)}
             name="loyer mensuel restant"
             value={register.rent}
@@ -133,12 +272,28 @@ class InputValidator extends React.PureComponent {
               'number is too low',
               'number is too high',
             ]}
+            InputLabelProps={{
+              classes: {
+                root: classes.cssLabel,
+                focused: classes.cssFocused,
+              },
+            }}
+            InputProps={{
+              classes: {
+                root: classes.cssOutlinedInput,
+                focused: classes.cssFocused,
+                notchedOutline: classes.notchedOutline,
+              },
+              inputMode: 'numeric',
+            }}
           />,
           <TextValidator
             ref={input => {
               this.consumerCredit = input;
             }}
             key="consumer-credit"
+            variant="outlined"
+            margin="normal"
             label="Crédit a la consommation"
             onChange={handleChange('consumerCredit', this.consumerCredit)}
             name="credit a la consommation"
@@ -150,13 +305,29 @@ class InputValidator extends React.PureComponent {
               'number is too low',
               'number is too high',
             ]}
+            InputLabelProps={{
+              classes: {
+                root: classes.cssLabel,
+                focused: classes.cssFocused,
+              },
+            }}
+            InputProps={{
+              classes: {
+                root: classes.cssOutlinedInput,
+                focused: classes.cssFocused,
+                notchedOutline: classes.notchedOutline,
+              },
+              inputMode: 'numeric',
+            }}
           />,
           <TextValidator
             ref={input => {
               this.otherCredit = input;
             }}
             key="other-credit"
+            variant="outlined"
             label="Autres crédit"
+            margin="normal"
             onChange={handleChange('otherCredit', this.otherCredit)}
             name="autres crédit"
             value={register.otherCredit}
@@ -167,6 +338,20 @@ class InputValidator extends React.PureComponent {
               'number is too low',
               'number is too high',
             ]}
+            InputLabelProps={{
+              classes: {
+                root: classes.cssLabel,
+                focused: classes.cssFocused,
+              },
+            }}
+            InputProps={{
+              classes: {
+                root: classes.cssOutlinedInput,
+                focused: classes.cssFocused,
+                notchedOutline: classes.notchedOutline,
+              },
+              inputMode: 'numeric',
+            }}
           />,
         ];
       default:
@@ -179,34 +364,42 @@ class InputValidator extends React.PureComponent {
     const { classes, index, buttonBack, onSubmit } = this.props;
     return (
       <div className={classes.container}>
-        <ValidatorForm
-          onSubmit={onSubmit}
-          onError={errors => console.log(errors)}
-        >
-          <div className={classes.validatorContainer}>
-            {this.renderValidator()}
-          </div>
-          <MobileStepper
-            steps={maxSteps}
-            position="static"
-            variant="text"
-            activeStep={index}
-            nextButton={
-              <Button
-                type="submit"
-                size="small"
-                disabled={index === this.maxSteps - 1}
-              >
-                <FormattedMessage {...messages.button[index].buttonNext} />
-              </Button>
-            }
-            backButton={
-              <Button size="small" onClick={buttonBack} disabled={index === 0}>
-                <FormattedMessage {...messages.backButton} />
-              </Button>
-            }
-          />
-        </ValidatorForm>
+        <MuiThemeProvider theme={themeLabel}>
+          <Paper elevation={3} className={classes.paper}>
+            <ValidatorForm
+              onSubmit={onSubmit}
+              onError={errors => console.log(errors)}
+            >
+              <div className={classes.validatorContainer}>
+                {this.renderValidator()}
+              </div>
+              <MobileStepper
+                steps={maxSteps}
+                position="static"
+                variant="dots"
+                activeStep={index}
+                nextButton={
+                  <Button
+                    type="submit"
+                    size="small"
+                    disabled={index === this.maxSteps - 1}
+                  >
+                    <FormattedMessage {...messages.button[index].buttonNext} />
+                  </Button>
+                }
+                backButton={
+                  <Button
+                    size="small"
+                    onClick={buttonBack}
+                    disabled={index === 0}
+                  >
+                    <FormattedMessage {...messages.backButton} />
+                  </Button>
+                }
+              />
+            </ValidatorForm>
+          </Paper>
+        </MuiThemeProvider>
       </div>
     );
   }
