@@ -1,13 +1,15 @@
 import { defineMessages } from 'react-intl';
 
 export default defineMessages({
-  dataResources: [
+  title: [
     {
-      basicResources: {
+      resource: {
         id: 'Safti.components.Validator.basicResources',
         defaultMessage: 'Mes ressources',
       },
-      spend: {
+    },
+    {
+      resource: {
         id: 'Safti.components.Validator.spend',
         defaultMessage: 'Mes depenses',
       },

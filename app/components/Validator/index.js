@@ -4,6 +4,7 @@ import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import MobileStepper from '@material-ui/core/MobileStepper';
 import Paper from '@material-ui/core/Paper';
 import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
 import {
   createMuiTheme,
   MuiThemeProvider,
@@ -36,6 +37,12 @@ const styles = theme => ({
     [theme.breakpoints.down('md')]: {
       marginBottom: 12,
     },
+  },
+  title: {
+    fontSize: '24px',
+    fontFamily: 'Montserrat, sans-serif',
+    fontWeight: 'bold',
+    color: '#e65e21',
   },
   cssLabel: {
     color: '#e65e21',
@@ -366,6 +373,10 @@ class InputValidator extends React.PureComponent {
       <div className={classes.container}>
         <MuiThemeProvider theme={themeLabel}>
           <Paper elevation={3} className={classes.paper}>
+            <img src="../../img/logo.png" alt="" style={{ width: 80 }} />
+            <Typography className={classes.title}>
+              <FormattedMessage {...messages.title[index].resource} />
+            </Typography>
             <ValidatorForm
               onSubmit={onSubmit}
               onError={errors => console.log(errors)}
@@ -380,6 +391,12 @@ class InputValidator extends React.PureComponent {
                 activeStep={index}
                 nextButton={
                   <Button
+                    style={{
+                      backgroundColor: '#e65e21',
+                      color: '#ffffff',
+                      width: 150,
+                      height: 55,
+                    }}
                     type="submit"
                     size="small"
                     disabled={index === this.maxSteps - 1}
@@ -389,6 +406,12 @@ class InputValidator extends React.PureComponent {
                 }
                 backButton={
                   <Button
+                    style={{
+                      backgroundColor: '#e65e21',
+                      color: '#ffffff',
+                      width: 150,
+                      height: 55,
+                    }}
                     size="small"
                     onClick={buttonBack}
                     disabled={index === 0}
