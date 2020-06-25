@@ -1,16 +1,16 @@
 {
-  "name": "react-boilerplate",
+  "name": "simulateur-immobilier",
   "version": "4.0.0",
-  "description": "A highly scalable, offline-first foundation with the best DX and a focus on performance and best practices",
+  "description": "simulateur de capacités d'emprunt",
   "repository": {
     "type": "git",
-    "url": "git://github.com/react-boilerplate/react-boilerplate.git"
+    "url": "https://github.com/alexisetienne/simulatorRealEstate.git"
   },
   "engines": {
     "npm": ">=5",
     "node": ">=8.15.1"
   },
-  "author": "Max Stoiber",
+  "author": "Alexis ETIENNE",
   "license": "MIT",
   "scripts": {
     "analyze:clean": "rimraf stats.json",
