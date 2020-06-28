@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core/styles';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
+import CheckInfo from '../CheckInfo';
 
 const themeLabel = createMuiTheme({
   overrides: {
@@ -101,11 +102,12 @@ const styles = theme => ({
 
 class InputValidator extends React.PureComponent {
   state = {
-    maxSteps: 2,
+    maxSteps: 3,
   };
 
   renderValidator() {
     const { register, handleChange, index, classes } = this.props;
+
     switch (index) {
       case 0:
         return [
@@ -350,9 +352,9 @@ class InputValidator extends React.PureComponent {
             key="other-credit"
             variant="outlined"
             label="Autres crédit"
-            margin="normal"
             onChange={handleChange('otherCredit', this.otherCredit)}
             name="autres crédit"
+            margin="normal"
             value={register.otherCredit}
             fullwidth
             validators={['required', 'minNumber:0', 'maxNumber:99999999']}
@@ -377,6 +379,12 @@ class InputValidator extends React.PureComponent {
             }}
           />,
         ];
+      case 2:
+        return (
+          <div>
+            <CheckInfo register={register} />
+          </div>
+        );
       default:
         return [];
     }

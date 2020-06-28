@@ -14,6 +14,12 @@ export default defineMessages({
         defaultMessage: 'Mes depenses',
       },
     },
+    {
+      resource: {
+        id: 'Safti.components.Validator.spend',
+        defaultMessage: 'Récapitulatif',
+      },
+    },
   ],
   netSalary: {
     id: 'Safti.components.Validator.netSalary',
@@ -51,6 +57,12 @@ export default defineMessages({
     {
       buttonNext: {
         id: 'Safti.components.Validator.buttonNext',
+        defaultMessage: 'Suivant',
+      },
+    },
+    {
+      buttonNext: {
+        id: 'Safti.components.Validator.buttonSubmit',
         defaultMessage: 'Suivant',
       },
     },
