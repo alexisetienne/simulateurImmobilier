@@ -13,8 +13,9 @@ import Result from '../../components/Result';
 class HomePage extends React.PureComponent {
   state = {
     amountSpend: 0,
-    // taxFee: 0,
-    // taxAssurances: 0,
+    annualAmount: 0,
+    taxFee: 0.75,
+    taxAmount: 0,
     index: 0,
     activeStep: 1,
     spentResult: 0,
@@ -96,27 +97,89 @@ class HomePage extends React.PureComponent {
       activeStep,
       register,
       monthlyCapacity,
+      annualAmount,
+      taxAmount,
+      // eslint-disable-next-line no-unused-vars
+      taxFee,
       // eslint-disable-next-line no-unused-vars
       amountSpend,
     } = this.state;
     const { homepageStore } = this.props;
     const steps = [
-      { title: '5 années' },
-      { title: '7 années' },
-      { title: '10 années' },
-      { title: '15 années' },
-      { title: '20 années' },
+      { title: '5 ans' },
+      { title: '7 ans' },
+      { title: '10 ans' },
+      { title: '15 ans' },
+      { title: '20 ans' },
     ];
+    // prettier-ignore
     const value = (
-      <div style={{ marginTop: '40px' }}>
+      <div>
         {/* eslint-disable-next-line no-nested-ternary */}
         {this.state.activeStep === 1 ? (
-          <div> {(monthlyCapacity * 60).toFixed(2)} </div>
-        ) : this.state.activeStep === 2 ? (
-          <div> {(monthlyCapacity * 84).toFixed(2)} </div>
-        ) : (
-          <div> {this.state.activeStep} </div>
-        )}
+          <div>
+            {' '}
+            {this.setState({
+              annualAmount: (monthlyCapacity * 60).toFixed(2),
+            })}
+            {annualAmount}
+            {this.setState({
+              taxAmount: (
+                ((annualAmount / 100) * taxFee + (annualAmount / 100) * 0.15) *
+                5
+              ).toFixed(2),
+            })}
+          </div>
+        ) : // eslint-disable-next-line no-nested-ternary
+          this.state.activeStep === 2 ? (
+            <div>
+              {(monthlyCapacity * 84).toFixed(2)}{' '}
+              {this.setState({ taxFee: 0.85 })}{' '}
+              {this.setState({
+                taxAmount: (
+                  ((annualAmount / 100) * taxFee + (annualAmount / 100) * 0.15) *
+                7
+                ).toFixed(2),
+              })}
+            </div>
+          ) : // eslint-disable-next-line no-nested-ternary
+            this.state.activeStep === 3 ? (
+              <div>
+                {(monthlyCapacity * 120).toFixed(2)}{' '}
+                {this.setState({ taxFee: 0.98 })}
+                {this.setState({
+                  taxAmount: (
+                    ((annualAmount / 100) * taxFee + (annualAmount / 100) * 0.15) *
+                10
+                  ).toFixed(2),
+                })}
+              </div>
+            ) : // eslint-disable-next-line no-nested-ternary
+              this.state.activeStep === 4 ? (
+                <div>
+                  {(monthlyCapacity * 180).toFixed(2)}{' '}
+                  {this.setState({ taxFee: 1.08 })}
+                  {this.setState({
+                    taxAmount: (
+                      ((annualAmount / 100) * taxFee + (annualAmount / 100) * 0.15) *
+                15
+                    ).toFixed(2),
+                  })}
+                </div>
+              ) : this.state.activeStep === 5 ? (
+                <div>
+                  {(monthlyCapacity * 240).toFixed(2)}{' '}
+                  {this.setState({ taxFee: 1.14 })}
+                  {this.setState({
+                    taxAmount: (
+                      ((annualAmount / 100) * taxFee + (annualAmount / 100) * 0.15) *
+                20
+                    ).toFixed(2),
+                  })}
+                </div>
+              ) : (
+                <div> {this.state.activeStep} </div>
+              )}
       </div>
     );
     return (
@@ -142,10 +205,11 @@ class HomePage extends React.PureComponent {
         {homepageStore.showResult ? (
           <Result
             arrayData={steps}
-            amountMonthly={monthlyCapacity}
+            amountMonthly={monthlyCapacity.toFixed(2)}
             activeStep={activeStep}
             amountSpend={value}
             handleClickStepper={this.handleClickStepper}
+            taxAmount={taxAmount}
           />
         ) : null}
       </div>

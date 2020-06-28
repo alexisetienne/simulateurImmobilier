@@ -4,7 +4,7 @@
   "description": "simulateur de capacités d'emprunt",
   "repository": {
     "type": "git",
-    "url": "https://github.com/alexisetienne/simulatorRealEstate.git"
+    "url": "https://github.com/alexisetienne/simulateurImmobilier"
   },
   "engines": {
     "npm": ">=5",
