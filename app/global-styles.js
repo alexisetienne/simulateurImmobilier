@@ -21,6 +21,37 @@ const GlobalStyle = createGlobalStyle`
     min-width: 100%;
   }
 
+  .stepper-item-inner-active {
+    background-color: #e65e21;
+}
+
+.stepper-item-inner-future {
+    background-color: #ffffff;
+}
+
+.stepper-item-inner-completed {
+   background-color: #ffffff;
+}
+
+.stepper-container .stepper-item .stepper-title {
+    font-family: "Roboto",Roboto,Arial,sans-serif;
+    position: absolute;
+    display: inline-block;
+    width: max-content;
+    max-width: 200px;
+    min-width: 200px;
+    transform: translate(-39%, 5px);
+    text-align: center;
+    font-size: 17px;
+}
+
+.stepper-container .stepper-item .stepper-title-active {
+    font-family: "Roboto",Roboto,Arial,sans-serif;
+    color: #1d1b38;
+    font-size: 17px;
+    font-weight: bold;
+}
+
   p,
   label {
     font-family: Georgia, Times, 'Times New Roman', serif;

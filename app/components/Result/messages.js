@@ -3,7 +3,15 @@ import { defineMessages } from 'react-intl';
 export default defineMessages({
   amountMonthly: {
     id: 'Safti.components.Result.amountMonthly',
-    defaultMessage: 'Montant de ma mensualité',
+    defaultMessage: 'Montant de ma mensualité :',
+  },
+  totalAmountCredit: {
+    id: 'Safti.components.Result.totalAmountCredit',
+    defaultMessage: 'Cout total de mon crédit :',
+  },
+  amountSpend: {
+    id: 'Safti.components.Result.amountSpend',
+    defaultMessage: 'Montant total de la somme empruntés :',
   },
   amountTotalRent: {
     id: 'Safti.components.Result.amountTotalRent',

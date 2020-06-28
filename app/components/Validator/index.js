@@ -10,9 +10,34 @@ import {
   MuiThemeProvider,
   withStyles,
 } from '@material-ui/core/styles';
+import NumberFormat from 'react-number-format';
 import { FormattedMessage } from 'react-intl';
 import messages from './messages';
 import CheckInfo from '../CheckInfo';
+
+function NumberFormatCustom(props) {
+  const { inputRef, onChange, ...other } = props;
+
+  return (
+    <NumberFormat
+      {...other}
+      getInputRef={inputRef}
+      onValueChange={values => {
+        onChange({
+          target: {
+            value: values.value,
+          },
+        });
+      }}
+      suffix="€"
+    />
+  );
+}
+
+NumberFormatCustom.propTypes = {
+  inputRef: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 const themeLabel = createMuiTheme({
   overrides: {
@@ -118,17 +143,13 @@ class InputValidator extends React.PureComponent {
             variant="outlined"
             margin="normal"
             key="salary-net"
-            label="Salaire net"
+            label="Salaire net *"
             onChange={handleChange('netSalary', this.netSalary)}
             name="salaire net"
             value={register.netSalary}
             fullwidth
-            validators={['required', 'minNumber:0', 'maxNumber:99999999']}
-            errorMessages={[
-              'this field is required',
-              'number is too low',
-              'number is too high',
-            ]}
+            validators={['required']}
+            errorMessages={['this field is required']}
             InputLabelProps={{
               classes: {
                 root: classes.cssLabel,
@@ -136,6 +157,7 @@ class InputValidator extends React.PureComponent {
               },
             }}
             InputProps={{
+              inputComponent: NumberFormatCustom,
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
@@ -151,7 +173,7 @@ class InputValidator extends React.PureComponent {
             key="annual-bonus"
             variant="outlined"
             margin="normal"
-            label="Primes annuelles"
+            label="Primes annuelles *"
             onChange={handleChange('annualBonus', this.annualBonus)}
             name="Primes annuelles"
             value={register.annualBonus}
@@ -169,6 +191,7 @@ class InputValidator extends React.PureComponent {
               },
             }}
             InputProps={{
+              inputComponent: NumberFormatCustom,
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
@@ -183,7 +206,7 @@ class InputValidator extends React.PureComponent {
             }}
             key="other-resource"
             variant="outlined"
-            label="Autres revenus"
+            label="Autres revenus *"
             margin="normal"
             onChange={handleChange('otherSalary', this.otherSalary)}
             name="autres revenus"
@@ -202,6 +225,7 @@ class InputValidator extends React.PureComponent {
               },
             }}
             InputProps={{
+              inputComponent: NumberFormatCustom,
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
@@ -217,7 +241,7 @@ class InputValidator extends React.PureComponent {
             key="received-rent"
             variant="outlined"
             margin="normal"
-            label="Loyers percus"
+            label="Loyers percus *"
             onChange={handleChange('receivedRent', this.receiveRent)}
             name="loyers percus"
             value={register.receivedRent}
@@ -235,6 +259,7 @@ class InputValidator extends React.PureComponent {
               },
             }}
             InputProps={{
+              inputComponent: NumberFormatCustom,
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
@@ -250,7 +275,7 @@ class InputValidator extends React.PureComponent {
             key="contribution"
             variant="outlined"
             margin="normal"
-            label="Apport"
+            label="Apport *"
             onChange={handleChange('contribution', this.contribution)}
             name="apport"
             value={register.contribution}
@@ -268,6 +293,7 @@ class InputValidator extends React.PureComponent {
               },
             }}
             InputProps={{
+              inputComponent: NumberFormatCustom,
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
@@ -284,7 +310,7 @@ class InputValidator extends React.PureComponent {
               this.rent = input;
             }}
             key="add-rent"
-            label="Loyer mensuel restant"
+            label="Loyer mensuel restant *"
             margin="normal"
             variant="outlined"
             onChange={handleChange('rent', this.rent)}
@@ -304,6 +330,7 @@ class InputValidator extends React.PureComponent {
               },
             }}
             InputProps={{
+              inputComponent: NumberFormatCustom,
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
@@ -319,7 +346,7 @@ class InputValidator extends React.PureComponent {
             key="consumer-credit"
             variant="outlined"
             margin="normal"
-            label="Crédit a la consommation"
+            label="Crédit a la consommation *"
             onChange={handleChange('consumerCredit', this.consumerCredit)}
             name="credit a la consommation"
             value={register.consumerCredit}
@@ -337,6 +364,7 @@ class InputValidator extends React.PureComponent {
               },
             }}
             InputProps={{
+              inputComponent: NumberFormatCustom,
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,
@@ -351,7 +379,7 @@ class InputValidator extends React.PureComponent {
             }}
             key="other-credit"
             variant="outlined"
-            label="Autres crédit"
+            label="Autres crédit *"
             onChange={handleChange('otherCredit', this.otherCredit)}
             name="autres crédit"
             margin="normal"
@@ -370,6 +398,7 @@ class InputValidator extends React.PureComponent {
               },
             }}
             InputProps={{
+              inputComponent: NumberFormatCustom,
               classes: {
                 root: classes.cssOutlinedInput,
                 focused: classes.cssFocused,

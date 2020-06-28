@@ -40,6 +40,7 @@ const styles = theme => ({
     fontFamily: 'Montserrat, sans-serif',
     fontWeight: 'bold',
     color: '#e65e21',
+    margin: 40,
   },
   cssLabel: {
     color: '#e65e21',
@@ -60,6 +61,16 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
   },
+  titleValue: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    fontFamily: 'Roboto, sans-serif',
+    fontSize: '32px',
+    fontWeight: 'bold',
+    color: '#1d1b38',
+  },
 });
 
 class Result extends React.PureComponent {
@@ -71,17 +82,21 @@ class Result extends React.PureComponent {
       amountSpend,
       handleClickStepper,
       arrayData,
+      taxAmount,
     } = this.props;
     return (
       <div className={classes.container}>
         <MuiThemeProvider theme={themeLabel}>
           <Paper elevation={3} className={classes.paper}>
             <img src="../../img/logo.png" alt="" style={{ width: 80 }} />
-            <Typography className={classes.title}>
+            <Typography align="center" className={classes.title}>
               <FormattedMessage {...messages.amountMonthly} />
             </Typography>
             <Typography className={classes.titleValue}>
-              {amountMonthly}
+              {amountMonthly} <EuroIcon />
+            </Typography>
+            <Typography align="center" className={classes.title}>
+              <FormattedMessage {...messages.amountSpend} />
             </Typography>
             <div style={{ width: '100%' }}>
               <Stepper
@@ -93,11 +108,21 @@ class Result extends React.PureComponent {
 
               <div style={{ marginTop: '40px' }}>
                 <div style={{ marginTop: '40px' }}>
-                  <div>
-                    {amountSpend} <EuroIcon />{' '}
+                  <div className={classes.resultAnnual}>
+                    <Typography align="center" className={classes.titleValue}>
+                      {amountSpend} <EuroIcon />
+                    </Typography>
                   </div>
                 </div>
               </div>
+            </div>
+            <div>
+              <Typography align="center" className={classes.title}>
+                <FormattedMessage {...messages.totalAmountCredit} />
+              </Typography>
+              <Typography className={classes.titleValue}>
+                {taxAmount} <EuroIcon />
+              </Typography>
             </div>
           </Paper>
         </MuiThemeProvider>
@@ -108,6 +133,7 @@ class Result extends React.PureComponent {
 Result.propTypes = {
   activeStep: PropTypes.number.isRequired,
   amountMonthly: PropTypes.number.isRequired,
+  taxAmount: PropTypes.number.isRequired,
   amountSpend: PropTypes.number.isRequired,
   arrayData: PropTypes.array.isRequired,
   handleClickStepper: PropTypes.func.isRequired,
