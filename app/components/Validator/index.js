@@ -46,6 +46,11 @@ const themeLabel = createMuiTheme({
         backgroundColor: '#e65e21',
       },
     },
+    MuiButton: {
+      root: {
+        minWidth: 124,
+      },
+    },
     MuiFormLabel: {
       root: {
         fontFamily: 'Cairo, sans-serif',
@@ -62,6 +67,12 @@ const themeLabel = createMuiTheme({
 });
 
 const styles = theme => ({
+  form: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   container: {
     display: 'flex',
     justifyContent: 'center',
@@ -71,13 +82,19 @@ const styles = theme => ({
   },
   stepperContainer: {
     width: 450,
+    [theme.breakpoints.down('sm')]: {
+      width: 'auto',
+    },
   },
-  buttonNext: {
+  button: {
     color: '#e65e21',
     borderColor: '#e65e21',
     '&:hover': {
       backgroundColor: '#e65e21',
       color: '#ffffff',
+    },
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 12,
     },
   },
   title: {
@@ -431,6 +448,7 @@ class InputValidator extends React.PureComponent {
               <FormattedMessage {...messages.title[index].resource} />
             </Typography>
             <ValidatorForm
+              className={classes.form}
               onSubmit={onSubmit}
               onError={errors => console.log(errors)}
             >
@@ -445,7 +463,7 @@ class InputValidator extends React.PureComponent {
                 activeStep={index}
                 nextButton={
                   <Button
-                    className={classes.buttonNext}
+                    className={classes.button}
                     type="submit"
                     variant="outlined"
                     size="large"
@@ -456,6 +474,7 @@ class InputValidator extends React.PureComponent {
                 }
                 backButton={
                   <Button
+                    className={classes.button}
                     variant="outlined"
                     size="large"
                     onClick={buttonBack}

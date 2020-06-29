@@ -22,6 +22,8 @@ const styles = theme => ({
     justifyContent: 'center',
     [theme.breakpoints.down('md')]: {
       marginBottom: 12,
+      overflowX: 'hidden',
+      overflowY: 'hidden',
     },
   },
   stepperContainer: {
@@ -41,6 +43,10 @@ const styles = theme => ({
     fontWeight: 'bold',
     color: '#e65e21',
     margin: 40,
+    [theme.breakpoints.down('md')]: {
+      marginBottom: 4,
+      fontSize: '17px',
+    },
   },
   cssLabel: {
     color: '#e65e21',
@@ -56,6 +62,10 @@ const styles = theme => ({
     margin: 50,
     padding: 50,
     width: 600,
+    [theme.breakpoints.down('md')]: {
+      margin: 0,
+      padding: 0,
+    },
   },
   validatorContainer: {
     display: 'flex',
@@ -70,6 +80,9 @@ const styles = theme => ({
     fontSize: '32px',
     fontWeight: 'bold',
     color: '#1d1b38',
+    [theme.breakpoints.down('md')]: {
+      fontSize: '24px',
+    },
   },
 });
 

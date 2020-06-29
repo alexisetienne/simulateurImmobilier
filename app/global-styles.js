@@ -33,6 +33,17 @@ const GlobalStyle = createGlobalStyle`
    background-color: #ffffff;
 }
 
+.stepper-container {
+    display: flex;
+    flex-wrap: nowrap;
+    background-color: transparent;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
 .stepper-container .stepper-item .stepper-title {
     font-family: "Roboto",Roboto,Arial,sans-serif;
     position: absolute;

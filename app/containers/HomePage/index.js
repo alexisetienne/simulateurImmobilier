@@ -119,6 +119,7 @@ class HomePage extends React.PureComponent {
         {this.state.activeStep === 1 ? (
           <div>
             {' '}
+            {this.setState({ taxFee: 0.75 })}
             {this.setState({
               annualAmount: (monthlyCapacity * 60).toFixed(2),
             })}
@@ -146,7 +147,7 @@ class HomePage extends React.PureComponent {
             this.state.activeStep === 3 ? (
               <div>
                 {(monthlyCapacity * 120).toFixed(2)}{' '}
-                {this.setState({ taxFee: 0.98 })}
+                {this.setState({ taxFee: 0.95 })}
                 {this.setState({
                   taxAmount: (
                     ((annualAmount / 100) * taxFee + (annualAmount / 100) * 0.15) *

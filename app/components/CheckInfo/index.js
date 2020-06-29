@@ -21,7 +21,7 @@ const themeLabel = createMuiTheme({
   overrides: {},
 });
 
-const styles = () => ({
+const styles = theme => ({
   table: {
     backgroundColor: '#e65e21',
   },
@@ -30,12 +30,18 @@ const styles = () => ({
     fontSize: 22,
     fontWeight: 'bold',
     color: '#ffffff',
+    [theme.breakpoints.down('md')]: {
+      fontSize: '16px',
+    },
   },
   title: {
     fontFamily: 'Roboto, sans-serif',
     fontSize: 17,
     fontWeight: 'bold',
     color: '#ffffff',
+    [theme.breakpoints.down('md')]: {
+      fontSize: '12px',
+    },
   },
 });
 
